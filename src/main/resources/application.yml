@@ -1,0 +1,41 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /ty-home/api
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ty_home?useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    hikari:
+      max-lifetime: 120000  #mysql默认等待时间10min，hikari默认30min https://stackoverflow.com/a/60380157/9342985
+  transaction:
+    rollback-on-commit-failure: true
+    default-timeout: 100
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+
+
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
+  type-aliases-package: com.ty_home_backend.model
+  type-handlers-package: com.ty_home_backend.mybatis
+  configuration:
+    call-setters-on-nulls: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  level:
+    com.ty_home_backend.dao: DEBUG
+
+springfox:
+  swagger2:
+    enabled: true

@@ -1,0 +1,16 @@
+D:\ty\2022-study\back\ty-home-backend\src\main\java\com\ty_home_backend\utils\Response\Pager.java
+D:\ty\2022-study\back\ty-home-backend\src\main\java\com\ty_home_backend\utils\Response\ResponseMessage\ResponseMessage.java
+D:\ty\2022-study\back\ty-home-backend\src\main\java\com\ty_home_backend\controller\ArticleController.java
+D:\ty\2022-study\back\ty-home-backend\src\main\java\com\ty_home_backend\service\article\ArticleService.java
+D:\ty\2022-study\back\ty-home-backend\src\main\java\com\ty_home_backend\model\article\ArticleModel.java
+D:\ty\2022-study\back\ty-home-backend\src\main\java\com\ty_home_backend\utils\Response\DataObj.java
+D:\ty\2022-study\back\ty-home-backend\src\main\java\com\ty_home_backend\utils\Response\ResponseMessage\ResponseFailMessage.java
+D:\ty\2022-study\back\ty-home-backend\src\main\java\com\ty_home_backend\model\CRUDModel.java
+D:\ty\2022-study\back\ty-home-backend\src\main\java\com\ty_home_backend\model\article\ArticleModelParams.java
+D:\ty\2022-study\back\ty-home-backend\src\main\java\com\ty_home_backend\service\CRUDService.java
+D:\ty\2022-study\back\ty-home-backend\src\main\java\com\ty_home_backend\dao\article\ArticleDao.java
+D:\ty\2022-study\back\ty-home-backend\src\main\java\com\ty_home_backend\TyHomeBackEndApplication.java
+D:\ty\2022-study\back\ty-home-backend\src\main\java\com\ty_home_backend\service\Impl\article\ArticleServiceImpl.java
+D:\ty\2022-study\back\ty-home-backend\src\main\java\com\ty_home_backend\service\Impl\CRUDServiceImpl.java
+D:\ty\2022-study\back\ty-home-backend\src\main\java\com\ty_home_backend\dao\CRUDDao.java
+D:\ty\2022-study\back\ty-home-backend\src\main\java\com\ty_home_backend\utils\Response\ResponseMessage\ResponseSuccessMessage.java

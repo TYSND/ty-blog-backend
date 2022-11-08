@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ty_home_backend.dao.account.AccountDao">
+    <resultMap id="accountInfoResult" type="AccountInfoModel">
+        <id property="userId" column="user_id" javaType="int"/>
+        <result property="account" column="account"/>
+    </resultMap>
+
+    <select id="getByAccount" resultMap="accountInfoResult">
+        select user_id, account
+        from account
+        where account = #{account}
+    </select>
+
+
+    <resultMap id="accountResult" type="AccountModel">
+        <id property="userId" column="user_id" javaType="int"/>
+        <result property="account" column="account"/>
+        <result property="hashedPwd" column="hashed_pwd"/>
+        <result property="pwdSalt" column="pwd_salt"/>
+        <result property="jwtSecret" column="jwt_secret"/>
+    </resultMap>
+
+    <select id="getById" resultMap="accountResult">
+        select *
+        from account
+        where user_id = #{id}
+    </select>
+
+    <insert id="create" useGeneratedKeys="true" parameterType="AccountModel">
+        insert into account
+        (account, hashed_pwd, pwd_salt, jwt_secret)
+        values
+        (#{account}, #{hashedPwd}, #{pwdSalt}, #{jwtSecret})
+    </insert>
+</mapper>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ty_home_backend.dao.article.ArticleDao">
+    <resultMap id="articleListResult" type="ArticleModel">
+        <id property="id" column="id" javaType="int" />
+        <result property="title" column="title" />
+        <result property="content" column="content" />
+        <result property="description" column="description" />
+        <result property="createTime" column="create_time" />
+        <result property="updateTime" column="update_time" />
+        <result property="anthologyId" column="anthology_id" />
+        <result property="anthologyName" column="anthology_name" />
+    </resultMap>
+
+    <sql id="searchCondition">
+        where article.is_delete = 0
+        <if test="obj.title != null">
+            and article.title like CONCAT('%',CONCAT(#{obj.title},'%'))
+        </if>
+        <if test="obj.anthologyId != null and obj.anthologyId != 0">
+            and article.anthology_id = #{obj.anthologyId}
+        </if>
+        <if test="isAll == false">
+            and article.anthology_id in (select id from anthology where is_hide = 0) and article.is_publish = 1
+        </if>
+    </sql>
+
+    <select id="getAuthorArticleListByPage" resultMap="articleListResult">
+        select
+        article.id, article.title, article.content, article.description, article.create_time, article.update_time, article.is_publish, article.anthology_id, anthology.name as anthology_name
+        from article
+        left join anthology
+        on article.anthology_id = anthology.id
+        <include refid="searchCondition" />
+        limit #{limit}
+        offset #{offset}
+    </select>
+
+    <select id="getReaderArticleListByPage" resultMap="articleListResult">
+        select
+        article.id, article.title, article.content, article.description, article.create_time, article.update_time, article.is_publish, article.anthology_id, anthology.name as anthology_name
+        from article
+        left join anthology
+        on article.anthology_id = anthology.id
+        <include refid="searchCondition" />
+        limit #{limit}
+        offset #{offset}
+    </select>
+
+    <select id="getAuthorArticleListByAll" resultMap="articleListResult">
+        select
+        article.id, article.title, article.content, article.description, article.create_time, article.update_time, article.is_publish, article.anthology_id, anthology.name as anthology_name
+        from article
+        left join anthology
+        on article.anthology_id = anthology.id
+        <include refid="searchCondition" />
+    </select>
+
+    <select id="getArticleDetailById" resultMap="articleListResult">
+        select
+        article.id, article.title, article.content, article.description, article.create_time, article.update_time, article.is_publish, article.anthology_id, anthology.name as anthology_name
+        from article
+        left join anthology
+        on article.anthology_id = anthology.id
+        where is_delete = 0
+        and article.id = #{articleId}
+    </select>
+
+    <select id="getCountByCondition" resultType="java.lang.Integer">
+        select count(*)
+        from article
+        left join anthology
+        on article.anthology_id = anthology.id
+        <include refid="searchCondition" />
+    </select>
+
+
+    <insert id="create" useGeneratedKeys="true" parameterType="ArticleModel">
+        insert into
+        article
+        (title, content, description, create_time, update_time, is_publish, anthology_id)
+        values
+        (#{title}, #{content}, #{description}, #{createTime}, #{updateTime}, #{isDelete}, #{anthologyId})
+    </insert>
+
+    <update id="update" parameterType="ArticleModel">
+        update store
+        set title = #{title},
+            content = #{content},
+            description = #{description},
+            is_hide = #{createTime},
+            is_discuss_hide = #{updateTime},
+            is_blog_hide = #{isDelete},
+            anthology_id = #{anthologyId}
+        where id=#{id};
+    </update>
+
+    <update id="moveArticle">
+        update article
+        set anthology_id = #{targetAnthologyId}
+        where id = #{articleId}
+    </update>
+
+    <update id="deleteById">
+        update article
+        set is_delete = 1
+        where id = #{articleId}
+    </update>
+
+
+</mapper>

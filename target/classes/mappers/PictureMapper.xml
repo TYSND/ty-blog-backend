@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ty_home_backend.dao.picture.PictureDao">
+    <resultMap id="pictureModelResult" type="PictureModel">
+        <id property="picId" column="pic_id" javaType="int"/>
+        <result property="path" column="path" typeHandler="com.ty_home_backend.mybatis.FileTypeHandler"/>
+        <result property="createTime" column="create_time"/>
+        <result property="size" column="size"/>
+        <result property="type" column="type"/>
+        <result property="md5" column="md5"/>
+    </resultMap>
+    <!--    pic_id, `path`, create_time, `size`, `type`, md5-->
+<!--        <select id="getPictureByMd5" parameterType="String" resultMap="pictureModelResult">-->
+<!--            select *-->
+<!--            from picture-->
+<!--            where md5 = #{md5}-->
+<!--        </select>-->
+
+    <select id="getPictureByMd5" parameterType="String" resultMap="pictureModelResult">
+        select *
+        from picture
+        where md5 = #{md5}
+    </select>
+
+    <insert id="uploadPicture" useGeneratedKeys="true" parameterType="PictureModel">
+        insert into picture
+            (`path`, create_time, `size`, `type`, md5)
+        values
+            (#{path}, #{createTime}, #{size}, #{type}, #{md5})
+    </insert>
+
+</mapper>

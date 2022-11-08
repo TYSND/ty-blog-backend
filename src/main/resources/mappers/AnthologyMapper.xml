@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ty_home_backend.dao.anthology.AnthologyDao">
+    <resultMap id="anthologyResult" type="AnthologyModel">
+        <id property="id" column="id" javaType="int" />
+        <result property="name" column="name" />
+        <result property="isHide" column="is_hide" />
+        <result property="createTime" column="create_time" />
+        <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <select id="getAllAnthology" resultMap="anthologyResult">
+        select * from anthology
+    </select>
+
+    <insert id="create" parameterType="AnthologyModel">
+        insert into
+        anthology
+        (name, is_hide, create_time, update_time)
+        values
+        (#{name}, #{isHide}, #{createTime}, #{updateTime})
+    </insert>
+
+    <update id="update" parameterType="AnthologyModel">
+        update anthology
+        set name = #{name},
+            is_hide = #{isHide},
+            create_time = #{createTime},
+            update_time = #{updateTime}
+        where id = #{id}
+    </update>
+</mapper>
